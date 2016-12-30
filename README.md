@@ -1,31 +1,95 @@
-# Petstore
+# Petstore API
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.22-1.
 
-## Development server
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Build Project
+Run `mvn clean install` to install all dependencies and to build the project. 
 
-## Code scaffolding
+## Running Unit tests 
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive/pipe/service/class`.
+Run `mvn test` to run all test cases. 
 
-## Build
+## Starting up the application 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
+Install mongo db and run using the `mongod` command
+Start the server using the `mvn spring-boot:run` command
+Server will come up at the following domain when running locally `http://localhost:8080`
 
-## Running unit tests
+To avoid installing mongo db an embedded mongo server can be used 
+Navigate to pom.xml and remove the scope element for the embedded mongo db to be used with the server
+<dependency>  
+	<groupId>de.flapdoodle.embed</groupId>
+	<artifactId>de.flapdoodle.embed.mongo</artifactId>
+	<version>1.50.2</version>
+	<scope>test</scope>
+</dependency> 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## API endpoings
+To use the Pet Api endpoints an `Authorization` header must be passed in
+to get a Authorization header value you must create the appropriate User Account with the right role
+Sample UserAccount creation
 
-## Running end-to-end tests
+`POST` for an admin user
+http://localhost:8080/user
+{
+    "id": 1,
+    "username": "userA",
+    "password": "password",
+    "role": "ADMIN"
+ }
+ 
+`POST` for an registered user
+http://localhost:8080/user
+{
+    "id": 2,
+    "username": "userB",
+    "password": "password",
+    "role": "USER"
+ }
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
+ To see all created users 
+ `GET`
+ http://localhost:8080/user/all
+ 
+ ______________________________________
+ To Retrieve a token for an account issue the following
+ 
+ `POST`
+ http://localhost:8080/login
+ 
+ {
+	"username":"userA",
+	"password":"password"
+ }
 
-## Deploying to Github Pages
+ sample response
+ 
+ {
+  "token": "$2a$10$Ln.LpTnraWriY91jRzpL3uQhcBAoMtKCez88ukd7w94b/umvUeJzO",
+  "role": "ADMIN"
+ }
+ _________________________________________
+ 
+ Pet API endpoints available
+ 
+ `GET`  required role any USER/ADMIN 
+ Retrieves all Pets
+ http://localhost:8080/pet/all
 
-Run `ng github-pages:deploy` to deploy to Github Pages.
 
-## Further help
+ `GET`  required role any USER/ADMIN 
+ Retrieves a particular Pet by its Id
+ http://localhost:8080/pet/1
+ 
+ `DELETE`  required role ADMIN 
+ Deletes a particular Pet by its Id
+ http://localhost:8080/pet/1
+ 
+ 
+ `POST`  required role ADMIN 
+ Creates a particular Pet 
+ Pet object model available at `http://petstore.swagger.io/`
+ 
+ http://localhost:8080/pet
+ 
 
-To get more help on the `angular-cli` use `ng --help` or go check out the [Angular-CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
