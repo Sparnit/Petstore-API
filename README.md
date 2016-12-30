@@ -15,14 +15,14 @@ Start the server using the `mvn spring-boot:run` command <br />
 Server will come up at the following domain when running locally `http://localhost:8080` <br />
 
 To avoid installing mongo db an embedded mongo server can be used  <br />
-Navigate to pom.xml and remove the scope element for the embedded mongo db to be used with the server <br />
+Navigate to pom.xml and remove the scope element for the embedded mongo db to be used with the server ***Note all data is lost on shutdown of application <br />
 ```
-<dependency>  <br />
-	<groupId>de.flapdoodle.embed</groupId> <br />
-	<artifactId>de.flapdoodle.embed.mongo</artifactId> <br />
-	<version>1.50.2</version> <br />
-	<scope>test</scope> <br />
-</dependency> <br />
+<dependency>  
+	<groupId>de.flapdoodle.embed</groupId> 
+	<artifactId>de.flapdoodle.embed.mongo</artifactId>
+	<version>1.50.2</version> 
+	<scope>test</scope>
+</dependency> 
 ```
 ## API endpoings
 To use the Pet Api endpoints an `Authorization` header must be passed in <br />
