@@ -88,7 +88,7 @@ Sample UserAccount creation <br />
  
  `POST`  required role ADMIN <br />
  Creates a particular Pet <br />
- Pet object model available at `http://petstore.swagger.io/`<br />
+ Pet object model available at [Petstore model] (http://petstore.swagger.io/)<br />
  
  `http://localhost:8080/pet` <br />
  
