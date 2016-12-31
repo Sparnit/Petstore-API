@@ -8,7 +8,16 @@ Run `mvn clean install` to install all dependencies and to build the project.
 
 Run `mvn test` to run all test cases. 
 
-## Starting up the application 
+## Enabling the application in the cloud
+
+Run `mvn package` <br />
+Navigate to the target directory and issue the following command < br/>
+`cf push petstore-api-parnit -p pet-rest-service-0.1.0.jar` < br />
+Test Application at the following url <br />
+`https://petstore-api-parnit.mybluemix.net/user/all`
+ 
+
+## Starting up the application locally
 
 Install mongo db and run using the `mongod` command <br />
 Start the server using the `mvn spring-boot:run` command <br />
