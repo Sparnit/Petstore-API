@@ -71,6 +71,10 @@ public class Pet {
 	}
 
 	public void setStatus(String status) {
-		this.status = status;
+		if(!status.equals("available") && !status.equals("pending") && !status.equals("sold")){
+			this.status = "available";
+		}else{
+			this.status = status;
+		}
 	}
 }
